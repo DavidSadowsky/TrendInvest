@@ -2,7 +2,7 @@
 With the incredible volatility in Cryptocurrency markets, it sometimes feels impossible to make investments that are better than throwing some money into a game of Blackjack. This project aims to solve that.
 
 ## TI-Data.py
-This script collects all the data that it possibly can on up to 3000 cryptocurrencies. Using LunarCrush and Reddit APIs, it seeks to aggregate mass amounts of data from Twitter and Reddit. It will collect data up to 5 weeks ago and save it into the 'data' subdirectory. You could run this once a day or once a month but the more often you run it, the better 'TI-Predict.py' will be able to perform. Full disclaimer, with the amount of data being collected and the API request limitations, this script takes a few hours to run.
+This script collects a lot of useful data on ~3000 cryptocurrencies. Using LunarCrush and Reddit APIs, it seeks to aggregate mass amounts of data from Twitter and Reddit. It will collect data up to 5 weeks ago and save it into the 'data' subdirectory. You could run this once a day or once a month but the more often you run it, the better 'TI-Predict.py' will be able to perform. Full disclaimer, with the amount of data being collected and the API request limitations, this script takes a few hours to run.
 
 *Note: Running this data more than once a day might be dentrimental to the usefulness of TI-Predict.py and it's really not necessary. Keeping a consistent schedule is best to collect quality data (e.g. everyday at noon, every sunday at 5pm, etc.)*
 
