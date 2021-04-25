@@ -10,11 +10,13 @@ This script collects all the data that it possibly can on up to 3000 cryptocurre
 This script will clean and balance the dataset(s) collected from 'TI-Data.py' and make a prediction as to whether a coin is bullish (expected to increase) or bearish (expected to decrease) in the following week. In the future when I'm happy with the accuracy of the model, I will save the model and create an interactive script purely for the purpose of inputting a coin name and receiving a prediction/confidence score. This model will be iteratively improved as new data becomes available. For now, I'm still aggregating data and this script will be what's used to predict cryptocurrency increasing or decreasing the following week.
 
 ## Updates
-None yet! The current version is the first iteration of this project.
+4/24/2021:
+- Updated training data parsed to include Twitter mentions & sentiment.
+- Updated feature extractor with new useful data points.
 
 ## Notes
 I'm currently getting ~66% accuracy from 5 weeks of data, which seems good (way better than Vegas) but this model only predicts whether a coin will increase or decrease - ***not*** how much it will increase or decrease by. That being said, if I invest $100 into 100 bullish coins, I may make returns from 59 coins but if the decrease of the 41 bearish coins is greater than the increase of the bullish coins, I still lose. For this reason, predictions from this model are not meant to be used for algorithmic trading. However, the predictions from this model can be another useful metric in the analysis of cryptocurrencies before investing.
 
 Something interesting I've seen is that this model is pretty good at classifying 'pump and dump' coins at the beginning of the 'pump' cycle. This needs to be explored further but this model could be a helpful tool for short-term crypto investing in smaller coins that have the potential of increasing ten or one-hundred fold (i.e. SafeMoon, DogeCoin, GarliCoin, etc.).
 
-Last disclaimer: The current project was created over the course of three days. As of right now, this project is relatively crude and has hundreds of opportunities for improvement and tuning. I will try to make improvements as time goes on but please check the commit history and updates section regularly if you plan on using this as a tool for investing.
+Last disclaimer: I'm just working on this project for fun, therefore, it's relatively crude and has hundreds of opportunities for improvement and tuning. I will try to make improvements as time goes on but please check the commit history and updates section regularly if you plan on using this as a tool for investing.
