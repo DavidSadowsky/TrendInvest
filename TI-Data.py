@@ -12,10 +12,10 @@ import pandas
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
-LUNAR_CRUSH_API_KEY = '6k44795xkr6e23ltalsndt'
+LUNAR_CRUSH_API_KEY = 'your api key here'
 
 # Initialize reddit instance
-reddit = praw.Reddit(client_id='24beT_d9Hxp_rQ', client_secret='8Xz6TrYt2iR-6WrUXFGHgP8K3TuSiw', user_agent='TI-Analyzer')
+reddit = praw.Reddit(client_id='your client id here', client_secret='your client secret here', user_agent='TI-Analyzer')
 
 def utc2tolocal(utc: float):
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(utc))
