@@ -192,11 +192,12 @@ class TrendInvestingModel:
     # Predict what coins will do, pass in one data row at a time
     def predict(self, row: list):
         features = self.tag_data(row)
-        tot_percent_change = 0
         prob_dist = self.classifier.prob_classify(features)
-        print(prob_dist)
+        if self.classifier.classify(features) == 'Bullish':
+            print(row['Coins'], 'is Bullish with', prob_dist.prob('Bullish'), 'confidence |', row['Percent change this week'])
+        else:
+            print(row['Coins'], 'is Bearish with', prob_dist.prob('Bearish'), 'confidence |', row['Percent change this week'])
         # print(row['Coins'], '|', self.classifier.classify(features), '|', row['Percent change this week'])
-        return tot_percent_change
 
 if __name__ == '__main__':
     ti = TrendInvestingModel()
