@@ -10,12 +10,13 @@ import requests
 import csv
 import pandas
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import config as cfg
 
 
-LUNAR_CRUSH_API_KEY = 'your api key here'
+LUNAR_CRUSH_API_KEY = cfg.LUNAR_KEY
 
 # Initialize reddit instance
-reddit = praw.Reddit(client_id='your client id here', client_secret='your client secret here', user_agent='TI-Analyzer')
+reddit = praw.Reddit(client_id=cfg.CLIENT_ID, client_secret=cfg.CLIENT_SECRET, user_agent=cfg.USER_AGENT)
 
 def utc2tolocal(utc: float):
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(utc))
@@ -57,7 +58,19 @@ def get_coin_meta_info():
 
 def get_social_feed_info(symbol: str, name: str, start: float, end: float):
     url = 'https://api.lunarcrush.com/v2?data=assets&key=' + LUNAR_CRUSH_API_KEY + '&symbol=' + symbol + '&data_points=7&interval=day&start=' + str(int(start)) + '&end=' + str(int(end))
-    assets = json.loads(urllib.request.urlopen(url).read())
+    assets = None
+    try:
+        assets = json.loads(urllib.request.urlopen(url).read())
+    except:
+        return {
+        'symbol': symbol,
+        'num_tweets': None,
+        'num_reddit_posts': None,
+        'percent_change_7d': None,
+        'r_sentiment': None,
+        't_sentiment': None,
+        'price': None
+    }
     data = assets['data']
     percent_change_7d = data[0]['percent_change_7d']
     num_tweets = 0
@@ -157,17 +170,24 @@ if __name__ == '__main__':
         
         # If data can't be collected for the past two weeks, discard it
         num_mentions_this_week = get_social_feed_info(coin[1], coin[0], week_ago, today)
-        if num_mentions_this_week['num_reddit_posts'] == 0:
+        if num_mentions_this_week['num_reddit_posts'] == 0 or num_mentions_this_week['num_reddit_posts'] == None:
             continue
 
         num_mentions_one_week_ago = get_social_feed_info(coin[1], coin[0], two_weeks_ago, week_ago)
-        if num_mentions_one_week_ago['num_reddit_posts'] == 0:
+        if num_mentions_one_week_ago['num_reddit_posts'] == 0 or num_mentions_one_week_ago['num_reddit_posts'] == None:
             continue
 
         num_mentions_two_weeks_ago = get_social_feed_info(coin[1], coin[0], three_weeks_ago, two_weeks_ago)
+        if num_mentions_two_weeks_ago['num_reddit_posts'] == None:
+            continue
+
         num_mentions_three_weeks_ago = get_social_feed_info(coin[1], coin[0], four_weeks_ago, three_weeks_ago)
+        if num_mentions_three_weeks_ago['num_reddit_posts'] == None:
+            continue
+
         num_mentions_four_weeks_ago = get_social_feed_info(coin[1], coin[0], five_weeks_ago, four_weeks_ago)
- 
+        if num_mentions_four_weeks_ago['num_reddit_posts'] == None:
+            continue
         
         # Store extracted features
         coin_names.append(coin[0])
