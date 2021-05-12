@@ -257,6 +257,32 @@ class TrendInvestingModel:
             return 'Bullish'
         else:
             return 'Bearish'
+    
+    def save_top_ten(self):
+        Coins = []
+        Symbols = []
+        Predictions = []
+        Confidences = []
+        for index, row in self.df.iterrows():
+            Coins.append(row['Coins'])
+            Symbols.append(row['Symbols'])
+            Predictions.append(self.classifier.classify(self.tag_data(row)))
+            Confidences.append(self.classifier.prob_classify(self.tag_data(row)).prob('Bullish'))
+        d = {
+            'Coins': Coins,
+            'Symbols': Symbols,
+            'Predictions': Predictions,
+            'Confidences': Confidences
+        }
+        d = pd.DataFrame(d, columns = ['Coins',
+        'Symbols',
+        'Predictions',
+        'Confidences'
+        ])
+        d = d.sort_values('Confidences', ascending=False)
+        file_url = 'topten' + self.utc2local(datetime.datetime.now().timestamp()) + '.csv'
+        d.to_csv(file_url, index = False, header=True)
+
         
     # Predict what coins will do, pass in one data row at a time
     def predict(self, row: list, percent: float, confidence: float):
@@ -405,4 +431,5 @@ if __name__ == '__main__':
     #     print('10%: accuracy when cofidence > 90%', correct/total)
     # else:
     #     print('10%: accuracy when cofidence > 90% - not enough data')
+    ti.save_top_ten()
     

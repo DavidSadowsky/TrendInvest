@@ -10,6 +10,12 @@ This script collects a lot of useful data on ~3000 cryptocurrencies. Using Lunar
 This script will clean and balance the dataset(s) collected from 'TI-Data.py' and make a prediction as to whether a coin is bullish (expected to increase) or bearish (expected to decrease) in the following week. In the future when I'm happy with the accuracy of the model, I will save the model and create an interactive script purely for the purpose of inputting a coin name and receiving a prediction/confidence score. This model will be iteratively improved as new data becomes available. For now, I'm still aggregating data and this script will be what's used to predict cryptocurrency increasing or decreasing the following week.
 
 ## Updates
+5/11/2021:
+- Moved API keys to config file (add this if you plan on using this locally)
+- Added function to save top ten most promising coins for the next week
+- Added models to predict coins that are expected to increase 5% and 10% in the next week
+- Created web app using this data (updated daily) for easy accessibility to this tool (https://trendinvestweb.herokuapp.com)
+
 4/24/2021:
 - Updated training data parsed to include Twitter mentions & sentiment.
 - Updated feature extractor with new useful data points.
