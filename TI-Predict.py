@@ -73,9 +73,6 @@ class TrendInvestingModel:
         # Save model
         path = 'Crypto_Model_Aggregate' + str(percent) + '%' + self.utc2local(datetime.datetime.now().timestamp()) + '.pkl'
         joblib.dump(self.classifier, path)
-        # Test accuracy
-        # print('Model accuracy:', nltk.classify.accuracy(self.classifier, test_set))
-        # self.classifier.show_most_informative_features()
 
     def train_model_curr(self, percent: int):
         tagged_data_curr = [(self.tag_data(row), self.is_incr(row['Price this week'] - (row['Price last week'] * (1 + (percent / 100))))) for index, row in self.curr_df.iterrows()]
@@ -117,10 +114,6 @@ class TrendInvestingModel:
         # Save model
         path = 'Crypto_Model_Current' + str(percent) + '%' + self.utc2local(datetime.datetime.now().timestamp()) + '.pkl'
         joblib.dump(self.classifier, path)
-        print('dumped')
-        # Test accuracy
-        # print('Model accuracy:', nltk.classify.accuracy(self.classifier, test_set))
-        # self.classifier.show_most_informative_features()
 
 
     # Deletes all rows with incomplete or dirty data
@@ -301,135 +294,9 @@ if __name__ == '__main__':
     ti = TrendInvestingModel()
     ti.train_model_aggregate(0)
     ti.train_model_curr(0)
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.0, 0.499999)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('bullish/bearish: accuracy when cofidence > 70%', correct/total)
-    # else:
-    #     print('bullish/bearish: accuracy when cofidence > 70% - not enough data')
-        
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.0, 0.80)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    
-    # if total != 0:
-    #     print('bullish/bearish: accuracy when cofidence > 80%', correct/total)
-    # else:
-    #     print('bullish/bearish: accuracy when cofidence > 80% - not enough data')
-        
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.0, 0.90)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('bullish/bearish: accuracy when cofidence > 90%', correct/total)
-    # else:
-    #     print('bullish/bearish: accuracy when cofidence > 90% - not enough data')
-
     ti.train_model_aggregate(5)
     ti.train_model_curr(5)
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.05, 0.70)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('5%: accuracy when cofidence > 70%', correct/total)
-    # else:
-    #     print('5%: accuracy when cofidence > 70% - not enough data')
-
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.05, 0.80)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('5%: accuracy when cofidence > 80%', correct/total)
-    # else:
-    #     print('5%: accuracy when cofidence > 80% - not enough data')
-
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.05, 0.90)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('5%: accuracy when cofidence > 90%', correct/total)
-    # else:
-    #     print('5%: accuracy when cofidence > 90% - not enough data')
-
     ti.train_model_aggregate(10)
     ti.train_model_curr(10)
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.1, 0.70)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('10%: accuracy when cofidence > 70%', correct/total)
-    # else:
-    #     print('10%: accuracy when cofidence > 70% - not enough data')
-
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.1, 0.80)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('10%: accuracy when cofidence > 80%', correct/total)
-    # else:
-    #     print('10%: accuracy when cofidence > 80% - not enough data')
-
-    # total = 0
-    # correct = 0
-    # for index, row in ti.df.iterrows():
-    #     pred = ti.predict(row, 1.1, 0.90)
-    #     if pred == 1:
-    #         total += 1
-    #         correct += 1
-    #     if pred == 0:
-    #         total += 1
-    # if total != 0:
-    #     print('10%: accuracy when cofidence > 90%', correct/total)
-    # else:
-    #     print('10%: accuracy when cofidence > 90% - not enough data')
     ti.save_top_ten()
     
